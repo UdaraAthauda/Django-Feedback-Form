@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .forms import *
+from .models import *
 import re
 
 # Create your views here.
@@ -32,6 +33,9 @@ def feedback(request):
             print(f"Email: {email}")
             print(f"Title: {title}")
             print(f"Feedback description: {feed}")
+
+            db_entry = Feedback(name=name, email=email, title=title, feed=feed)
+            db_entry.save()
 
 
         mydictionary["error"] = errorflag
